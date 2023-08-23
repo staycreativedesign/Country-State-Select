@@ -23,6 +23,11 @@ module CountryStateSelect
     states
   end
 
+  # Pass array of wanted countries to get back all in the array
+  def self.only_countries(*selected)
+    countries_collection.collect { |c| c if selected.include?(c[1]) }.compact
+  end
+
   # Return either the City (String) or Cities (Array)
   def self.cities_collection(f, options)
     cities = collect_cities(f.object.send(options[:state]))
